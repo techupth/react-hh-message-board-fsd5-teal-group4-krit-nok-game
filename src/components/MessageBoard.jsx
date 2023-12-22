@@ -1,4 +1,22 @@
+import { useState } from "react";
+
 function MessageBoard() {
+  const [displayBox, setDisplay] = useState([]);
+  const [msg, setMsg] = useState("");
+
+  const submitMsg = function (event) {
+    event.preventDefault();
+    const newDisplay = [...displayBox];
+    newDisplay.push(msg);
+    setDisplay(newDisplay);
+  };
+
+  const deleteDisplay = function (displayIndex) {
+    const newDisplay = [...displayBox];
+    newDisplay.splice(displayIndex, 1);
+    setDisplay(newDisplay);
+  };
+
   return (
     <div className="app-wrapper">
       <h1 class="app-title">Message board</h1>
@@ -9,15 +27,29 @@ function MessageBoard() {
             name="message-text"
             type="text"
             placeholder="Enter message here"
+            onChange={(event) => setMsg(event.target.value)}
           />
         </label>
-        <button className="submit-message-button">Submit</button>
+        <button className="submit-message-button" onClick={submitMsg}>
+          Submit
+        </button>
       </div>
       <div class="board">
-        <div className="message">
-          <h1>Hello all ! This is first message.</h1>
-          <button className="delete-button">x</button>
-        </div>
+        <h1>
+          {displayBox.map((text, index) => {
+            return (
+              <div className="message">
+                {text}{" "}
+                <button
+                  className="delete-button"
+                  onClick={() => deleteDisplay(index)}
+                >
+                  x
+                </button>
+              </div>
+            );
+          })}
+        </h1>
       </div>
     </div>
   );
