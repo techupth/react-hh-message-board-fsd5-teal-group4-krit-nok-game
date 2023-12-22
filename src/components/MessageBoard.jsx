@@ -18,8 +18,8 @@ function MessageBoard() {
 
   return (
     <div className="app-wrapper">
-      <h1 class="app-title">Message board</h1>
-      <div class="message-input-container">
+      <h1 className="app-title">Message board</h1>
+      <div className="message-input-container">
         <label>
           <input
             id="message-text"
@@ -38,7 +38,7 @@ function MessageBoard() {
           Submit
         </button>
       </div>
-      <div class="board">
+      <div className="board">
         {messageList.map((message, index) => {
           return (
             <div className="message" key={index}>
